@@ -1,0 +1,19 @@
+version: '3.1'
+services:
+  app:
+    network_mode: host
+    container_name: flowers
+    image: flowers
+    build: ./
+    ports:
+      - "8086:8086"
+    depends_on:
+      - dbpostgresql
+  dbpostgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=flowers
